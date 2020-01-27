@@ -46,7 +46,8 @@ void MP4RootAtom::BeginWrite(bool use64)
     m_rewrite_ftyp = (MP4FtypAtom*)FindChildAtom( "ftyp" );
     if( m_rewrite_ftyp ) {
         m_rewrite_free = (MP4FreeAtom*)MP4Atom::CreateAtom( m_File, NULL, "free" );
-        m_rewrite_free->SetSize( 32*4 ); // room for 32 additional brands
+        //m_rewrite_free->SetSize( 32*4 ); // room for 32 additional brands
+        m_rewrite_free->SetSize( 1024*1024*2 );
         AddChildAtom( m_rewrite_free );
 
         m_rewrite_ftypPosition = m_File.GetPosition();
@@ -64,31 +65,43 @@ void MP4RootAtom::Write()
     // no-op
 }
 
-void MP4RootAtom::FinishWrite(bool use64)
+void MP4RootAtom::FinishWrite(bool use64, bool flash)
 {
-    if( m_rewrite_ftyp ) {
-        const uint64_t savepos = m_File.GetPosition();
-        m_File.SetPosition( m_rewrite_ftypPosition );
-        m_rewrite_ftyp->Write();
-
-        const uint64_t newpos = m_File.GetPosition();
-        if( newpos > m_rewrite_freePosition )
-            m_rewrite_free->SetSize( m_rewrite_free->GetSize() - (newpos - m_rewrite_freePosition) ); // shrink
-        else if( newpos < m_rewrite_freePosition )
-            m_rewrite_free->SetSize( m_rewrite_free->GetSize() + (m_rewrite_freePosition - newpos) ); // grow
-
-        m_rewrite_free->Write();
-        m_File.SetPosition( savepos );
+    if(flash && !m_rewrite_ftyp){
+        return;
     }
 
     // finish writing last mdat atom
     const uint32_t mdatIndex = GetLastMdatIndex();
-    m_pChildAtoms[mdatIndex]->FinishWrite( m_File.Use64Bits( "mdat" ));
+    {
+        m_pChildAtoms[mdatIndex]->FinishWrite( m_File.Use64Bits( "mdat" ));
+    }
+
+    uint64_t savepos = 0;
+    if( m_rewrite_ftyp ) {
+        savepos = m_File.GetPosition();
+        m_File.SetPosition( m_rewrite_ftypPosition );
+        m_rewrite_ftyp->Write();
+    }
 
     // write all atoms after last mdat
     const uint32_t size = m_pChildAtoms.Size();
-    for ( uint32_t i = mdatIndex + 1; i < size; i++ )
-        m_pChildAtoms[i]->Write();
+    for ( uint32_t i = mdatIndex + 1; i < size; i++ ){
+        if ( std::string(m_pChildAtoms[i]->GetType()) != "free"){
+            m_pChildAtoms[i]->Write();
+        }
+    }
+
+    if(m_rewrite_ftyp){
+        const uint64_t newpos = m_File.GetPosition();
+        assert(newpos < m_rewrite_freePosition + 1024*1024*2);
+        if( newpos > m_rewrite_freePosition )
+            m_rewrite_free->SetSize( 1024*1024*2 - (newpos - m_rewrite_freePosition) ); // shrink
+        else if( newpos < m_rewrite_freePosition )
+            m_rewrite_free->SetSize( 1024*1024*2 + (m_rewrite_freePosition - newpos) ); // grow
+        m_rewrite_free->Write();
+        m_File.SetPosition( savepos );
+    }
 }
 
 void MP4RootAtom::BeginOptimalWrite()

@@ -82,6 +82,14 @@ File::seek( Size pos )
     return false;
 }
 
+bool 
+File::sync()
+{
+    if( !_isOpen )
+        return true;
+    return _provider.sync();
+}
+
 bool
 File::read( void* buffer, Size size, Size& nin, Size maxChunkSize )
 {
@@ -194,6 +202,11 @@ int64_t CustomFileProvider::getSize()
    return _call.size( _handle );
 }
 
+bool 
+CustomFileProvider::sync()
+{
+    return _call.sync( _handle );
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 }}} // namespace mp4v2::platform::io

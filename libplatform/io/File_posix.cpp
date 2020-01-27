@@ -14,6 +14,7 @@ public:
     bool read( void* buffer, Size size, Size& nin, Size maxChunkSize );
     bool write( const void* buffer, Size size, Size& nout, Size maxChunkSize );
     bool close();
+    bool sync();
 
     int64_t getSize();
 
@@ -91,6 +92,13 @@ StandardFileProvider::write( const void* buffer, Size size, Size& nout, Size max
         return true;
     nout = size;
     return false;
+}
+
+bool
+StandardFileProvider::sync()
+{
+    _fstream.sync();
+    return _fstream.fail();
 }
 
 bool

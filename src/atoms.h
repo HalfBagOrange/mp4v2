@@ -64,7 +64,7 @@ public:
     MP4RootAtom(MP4File &file);
     void BeginWrite(bool use64 = false);
     void Write();
-    void FinishWrite(bool use64 = false);
+    void FinishWrite(bool use64 = false, bool flash = false);
 
     void BeginOptimalWrite();
     void FinishOptimalWrite();

@@ -40,13 +40,14 @@ void MP4FreeAtom::Write()
 {
     bool use64 = (GetSize() > (0xFFFFFFFF - 8));
     BeginWrite(use64);
-#if 1
-    for (uint64_t ix = 0; ix < GetSize(); ix++) {
-        m_File.WriteUInt8(0);
+    if(m_File.GetPosition() + GetSize() > m_File.GetSize()){
+        for (uint64_t ix = 0; ix < GetSize(); ix++) {
+            m_File.WriteUInt8(0);
+        }
     }
-#else
-    m_File.SetPosition(m_File.GetPosition() + GetSize());
-#endif
+    else{
+        m_File.SetPosition(m_File.GetPosition() + GetSize());
+    }
     FinishWrite(use64);
 }
 

@@ -513,7 +513,7 @@ void MP4File::BeginWrite()
     m_pRootAtom->BeginWrite();
 }
 
-void MP4File::FinishWrite(uint32_t options)
+void MP4File::FinishWrite(uint32_t options, bool flash)
 {
     // remove empty moov.udta.meta.ilst
     {
@@ -575,11 +575,11 @@ void MP4File::FinishWrite(uint32_t options)
     }
 
     // ask root atom to write
-    m_pRootAtom->FinishWrite();
+    m_pRootAtom->FinishWrite(false, flash);
 
     // finished all writes, if position < size then file has shrunk and
     // we mark remaining bytes as free atom; otherwise trailing garbage remains.
-    if( GetPosition() < GetSize() ) {
+    if(!flash && GetPosition() < GetSize() ) {
         MP4RootAtom* root = (MP4RootAtom*)FindAtom( "" );
         ASSERT( root );
 
@@ -596,6 +596,8 @@ void MP4File::FinishWrite(uint32_t options)
         root->AddChildAtom( freeAtom );
         freeAtom->Write();
     }
+
+    m_file->sync();
 }
 
 void MP4File::UpdateDuration(MP4Duration duration)
@@ -622,6 +624,18 @@ void MP4File::Close(uint32_t options)
     delete m_file;
     m_file = NULL;
 }
+
+bool MP4File::Flush(uint32_t options)
+{
+    if( IsWriteMode() ) {
+        SetIntegerProperty( "moov.mvhd.modificationTime", MP4GetAbsTimestamp() );
+        FinishWrite(options, true);
+        return true;
+    }
+    
+    return false;
+}
+
 
 void MP4File::Rename(const char* oldFileName, const char* newFileName)
 {

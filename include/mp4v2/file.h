@@ -41,6 +41,7 @@ typedef struct MP4FileProvider_s
     int   ( *write )( void* handle, const void* buffer, int64_t size, int64_t* nout, int64_t maxChunkSize );
     int   ( *close )( void* handle );
     int64_t ( *size)( void* handle );
+    int64_t ( *sync)( void* handle );
 } MP4FileProvider;
 
 /** Close an mp4 file.
@@ -84,6 +85,11 @@ MP4V2_EXPORT
 MP4FileHandle MP4Create(
     const char* fileName,
     uint32_t    flags DEFAULT(0) );
+
+MP4V2_EXPORT
+bool MP4Flush(
+    MP4FileHandle hFile,
+     uint32_t  flags DEFAULT(0) );
 
 /** Create a new mp4 file with extended options.
  *

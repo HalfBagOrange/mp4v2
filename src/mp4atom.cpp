@@ -526,7 +526,7 @@ void MP4Atom::BeginWrite(bool use64)
     }
 }
 
-void MP4Atom::FinishWrite(bool use64)
+void MP4Atom::FinishWrite(bool use64, bool flash)
 {
     m_end = m_File.GetPosition();
     m_size = (m_end - m_start);

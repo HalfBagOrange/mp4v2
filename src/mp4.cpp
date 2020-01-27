@@ -251,6 +251,26 @@ MP4FileHandle MP4ReadProvider( const char* fileName, const MP4FileProvider* file
         return false;
     }
 
+    bool MP4Flush(MP4FileHandle hFile, uint32_t  flags)
+    {
+        if( !MP4_IS_VALID_FILE_HANDLE( hFile ))
+            return false;
+
+        MP4File& f = *(MP4File*)hFile;
+        try {
+            return f.Flush(flags);
+        }
+        catch( Exception* x ) {
+            mp4v2::impl::log.errorf(*x);
+            delete x;
+        }
+        catch( ... ) {
+            mp4v2::impl::log.errorf( "%s: failed", __FUNCTION__ );
+        }
+
+        return false;
+    }
+
     void MP4Close(MP4FileHandle hFile, uint32_t  flags)
     {
         if( !MP4_IS_VALID_FILE_HANDLE( hFile ))

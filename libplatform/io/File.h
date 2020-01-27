@@ -30,6 +30,7 @@ public:
     virtual bool read( void* buffer, Size size, Size& nin, Size maxChunkSize ) = 0;
     virtual bool write( const void* buffer, Size size, Size& nout, Size maxChunkSize ) = 0;
     virtual bool close() = 0;
+    virtual bool sync() = 0;
 
     virtual int64_t getSize() = 0;
 protected:
@@ -166,6 +167,7 @@ public:
 
     int64_t getSize();
 
+    bool sync();
 
 private:
     std::string   _name;
@@ -199,6 +201,7 @@ public:
     bool read( void* buffer, Size size, Size& nin, Size maxChunkSize );
     bool write( const void* buffer, Size size, Size& nout, Size maxChunkSize );
     bool close();
+    bool sync();
 
     int64_t getSize();
 private:

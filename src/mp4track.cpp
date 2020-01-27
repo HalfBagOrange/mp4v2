@@ -516,12 +516,14 @@ void MP4Track::WriteChunkBuffer()
     m_chunkDuration = 0;
 }
 
-void MP4Track::FinishWrite(uint32_t options)
+void MP4Track::FinishWrite(uint32_t options, bool flash)
 {
     FinishSdtp();
 
     // write out any remaining samples in chunk buffer
-    WriteChunkBuffer();
+    if(!flash){
+        WriteChunkBuffer();
+    }
 
     if (m_pStszFixedSampleSizeProperty == NULL &&
             m_stsz_sample_bits == 4) {

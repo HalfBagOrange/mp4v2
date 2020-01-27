@@ -190,7 +190,7 @@ public:
     virtual void BeginWrite(bool use64 = false);
     virtual void Write();
     virtual void Rewrite();
-    virtual void FinishWrite(bool use64 = false);
+    virtual void FinishWrite(bool use64 = false, bool flash = false);
     virtual void Dump(uint8_t indent, bool dumpImplicits);
 
     bool GetLargesizeMode();

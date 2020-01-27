@@ -37,6 +37,7 @@ public:
     bool read( void* buffer, Size size, Size& nin, Size maxChunkSize );
     bool write( const void* buffer, Size size, Size& nout, Size maxChunkSize );
     bool close();
+    bool sync();
 
     int64_t getSize();
 
@@ -54,6 +55,12 @@ private:
 StandardFileProvider::StandardFileProvider()
     : _handle( INVALID_HANDLE_VALUE )
 {
+}
+
+bool 
+StandardFileProvider::sync(){ 
+    ASSERT(0); 
+    return false; 
 }
 
 /**

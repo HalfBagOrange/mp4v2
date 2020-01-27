@@ -90,6 +90,7 @@ public:
     bool CopyClose( const string& copyFileName );
     void Dump( bool dumpImplicits = false );
     void Close(uint32_t flags = 0);
+    bool Flush(uint32_t flags = 0);
 
     bool Use64Bits(const char *atomName);
     void Check64BitStatus(const char *atomName);
@@ -861,7 +862,7 @@ protected:
     void ReadFromFile();
     void GenerateTracks();
     void BeginWrite();
-    void FinishWrite(uint32_t options);
+    void FinishWrite(uint32_t options, bool flash = false);
     void CacheProperties();
     void RewriteMdat( File& src, File& dst );
     bool ShallHaveIods();
