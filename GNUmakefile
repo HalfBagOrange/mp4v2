@@ -34,8 +34,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = i386-apple-darwin14.5.0
-host_triplet = i386-apple-darwin14.5.0
+build_triplet = armv7l-unknown-linux-gnueabi
+host_triplet = armv7l-unknown-linux-gnueabi
 bin_PROGRAMS = $(am__EXEEXT_1)
 check_PROGRAMS =
 am__append_1 = \
@@ -52,25 +52,25 @@ am__append_1 = \
 #        libplatform/process/process_win32.cpp  \
 #        libplatform/time/time_win32.cpp
 
-am__append_3 = \
-        libutil/Database.cpp       \
-        libutil/Database.h         \
-        libutil/Timecode.cpp       \
-        libutil/Timecode.h         \
-        libutil/TrackModifier.cpp  \
-        libutil/TrackModifier.h    \
-        libutil/Utility.cpp        \
-        libutil/Utility.h          \
-        libutil/crc.cpp            \
-        libutil/crc.h              \
-        libutil/impl.h             \
-        libutil/other.cpp          \
-        libutil/other.h            \
-        libutil/util.h
+#am__append_3 = \
+#        libutil/Database.cpp       \
+#        libutil/Database.h         \
+#        libutil/Timecode.cpp       \
+#        libutil/Timecode.h         \
+#        libutil/TrackModifier.cpp  \
+#        libutil/TrackModifier.h    \
+#        libutil/Utility.cpp        \
+#        libutil/Utility.h          \
+#        libutil/crc.cpp            \
+#        libutil/crc.h              \
+#        libutil/impl.h             \
+#        libutil/other.cpp          \
+#        libutil/other.h            \
+#        libutil/util.h
 
-am__append_4 = mp4art mp4chaps mp4extract mp4file \
-	mp4info mp4subtitle mp4tags mp4track \
-	mp4trackdump
+#am__append_4 = mp4art mp4chaps mp4extract mp4file \
+#	mp4info mp4subtitle mp4tags mp4track \
+#	mp4trackdump
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(mp4v2inc_HEADERS) \
 	$(srcdir)/GNUmakefile.am $(srcdir)/GNUmakefile.in \
@@ -191,9 +191,9 @@ am__objects_1 = libplatform/io/File_posix.lo \
 #	libplatform/number/random_win32.lo \
 #	libplatform/process/process_win32.lo \
 #	libplatform/time/time_win32.lo
-am__objects_3 = libutil/Database.lo libutil/Timecode.lo \
-	libutil/TrackModifier.lo libutil/Utility.lo \
-	libutil/crc.lo libutil/other.lo
+#am__objects_3 = libutil/Database.lo libutil/Timecode.lo \
+#	libutil/TrackModifier.lo libutil/Utility.lo \
+#	libutil/crc.lo libutil/other.lo
 am_libmp4v2_la_OBJECTS = src/3gp.lo src/atom_ac3.lo src/atom_amr.lo \
 	src/atom_avc1.lo src/atom_avcC.lo src/atom_chpl.lo \
 	src/atom_colr.lo src/atom_d263.lo src/atom_dac3.lo \
@@ -231,11 +231,11 @@ libmp4v2_la_OBJECTS = $(am_libmp4v2_la_OBJECTS)
 libmp4v2_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(libmp4v2_la_LDFLAGS) $(LDFLAGS) -o $@
-am__EXEEXT_1 = mp4art$(EXEEXT) mp4chaps$(EXEEXT) \
-	mp4extract$(EXEEXT) mp4file$(EXEEXT) \
-	mp4info$(EXEEXT) mp4subtitle$(EXEEXT) \
-	mp4tags$(EXEEXT) mp4track$(EXEEXT) \
-	mp4trackdump$(EXEEXT)
+#am__EXEEXT_1 = mp4art$(EXEEXT) mp4chaps$(EXEEXT) \
+#	mp4extract$(EXEEXT) mp4file$(EXEEXT) \
+#	mp4info$(EXEEXT) mp4subtitle$(EXEEXT) \
+#	mp4tags$(EXEEXT) mp4track$(EXEEXT) \
+#	mp4trackdump$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 am_mp4art_OBJECTS = util/mp4art.$(OBJEXT)
 mp4art_OBJECTS = $(am_mp4art_OBJECTS)
@@ -314,13 +314,13 @@ GZIP_ENV = --best
 DIST_ARCHIVES = $(distdir).tar.bz2 $(distdir).zip
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /Users/stephenwagner/code/Camtasia-Mac/mp4v2/autoaux/missing --run aclocal-1.11
-AMTAR = ${SHELL} /Users/stephenwagner/code/Camtasia-Mac/mp4v2/autoaux/missing --run tar
+ACLOCAL = ${SHELL} /home/pi/code/robot/opensources/mp4v2/autoaux/missing --run aclocal-1.11
+AMTAR = ${SHELL} /home/pi/code/robot/opensources/mp4v2/autoaux/missing --run tar
 AR = ar
-AUTOCONF = ${SHELL} /Users/stephenwagner/code/Camtasia-Mac/mp4v2/autoaux/missing --run autoconf
-AUTOHEADER = ${SHELL} /Users/stephenwagner/code/Camtasia-Mac/mp4v2/autoaux/missing --run autoheader
-AUTOMAKE = ${SHELL} /Users/stephenwagner/code/Camtasia-Mac/mp4v2/autoaux/missing --run automake-1.11
-AWK = awk
+AUTOCONF = ${SHELL} /home/pi/code/robot/opensources/mp4v2/autoaux/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/pi/code/robot/opensources/mp4v2/autoaux/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/pi/code/robot/opensources/mp4v2/autoaux/missing --run automake-1.11
+AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=none
 CFLAGS = -g -O2
@@ -333,37 +333,37 @@ CXXFLAGS = -g -O2 -fvisibility=hidden
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
-DSYMUTIL = dsymutil
+DSYMUTIL = 
 DUMPBIN = 
-ECHO_C = \c
-ECHO_N = 
+ECHO_C = 
+ECHO_N = -n
 ECHO_T = 
-EGREP = /usr/bin/grep -E
+EGREP = /bin/grep -E
 EXEEXT = 
-FGREP = /usr/bin/grep -F
+FGREP = /bin/grep -F
 FOUND_HELP2MAN = no
-GREP = /usr/bin/grep
+GREP = /bin/grep
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
+LD = /usr/bin/ld
 LDFLAGS = 
 LIBOBJS = 
 LIBS := $(LIBS) $(X_MINGW_LIBS)
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = lipo
+LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /Users/stephenwagner/code/Camtasia-Mac/mp4v2/autoaux/missing --run makeinfo
-MKDIR_P = autoaux/install-sh -c -d
-NM = /usr/bin/nm
-NMEDIT = nmedit
-OBJDUMP = false
+MAKEINFO = ${SHELL} /home/pi/code/robot/opensources/mp4v2/autoaux/missing --run makeinfo
+MKDIR_P = /bin/mkdir -p
+NM = /usr/bin/nm -B
+NMEDIT = 
+OBJDUMP = objdump
 OBJEXT = o
-OTOOL = otool
-OTOOL64 = :
+OTOOL = 
+OTOOL64 = 
 PACKAGE = mp4v2
 PACKAGE_BUGREPORT = kidjan@gmail.com
 PACKAGE_NAME = MP4v2
@@ -373,7 +373,7 @@ PACKAGE_URL =
 PACKAGE_VERSION = 2.0.0
 PATH_SEPARATOR = :
 PROJECT_bugreport = <kidjan@gmail.com>
-PROJECT_build = Sun Sep 25 16:09:30 EDT 2016
+PROJECT_build = Tue Jan 28 21:53:24 CST 2020
 PROJECT_irc = irc://irc.freenode.net/handbrake
 PROJECT_name = MP4v2
 PROJECT_name_formal = MP4v2 2.0.0
@@ -395,9 +395,9 @@ PROJECT_version_major = 2
 PROJECT_version_minor = 0
 PROJECT_version_point = 0
 RANLIB = ranlib
-SED = /usr/bin/sed
+SED = /bin/sed
 SET_MAKE = 
-SHELL = /bin/sh
+SHELL = /bin/bash
 STRIP = strip
 VERSION = 2.0.0
 X_CXX_ARCH = 
@@ -406,16 +406,16 @@ X_CXX_I =
 X_CXX_W = 
 X_GCH = 1
 X_GCH_FLAGS = 
-X_GCH_SHARED = 1
-X_GCH_SHARED_FLAGS =  -fno-common -DPIC
+X_GCH_SHARED = 0
+X_GCH_SHARED_FLAGS =  -fPIC -DPIC
 X_GCH_STATIC = 1
-X_GCH_STATIC_FLAGS = 
+X_GCH_STATIC_FLAGS = -static
 X_MINGW_LIBS = 
-X_libmp4v2_la_LDFLAGS = -Wl,-current_version,$(PROJECT_version_major).$(PROJECT_version_minor).$(PROJECT_version_point) -Wl,-compatibility_version,$(PROJECT_version_major).0.0
-abs_builddir = /Users/stephenwagner/code/Camtasia-Mac/mp4v2
-abs_srcdir = /Users/stephenwagner/code/Camtasia-Mac/mp4v2
-abs_top_builddir = /Users/stephenwagner/code/Camtasia-Mac/mp4v2
-abs_top_srcdir = /Users/stephenwagner/code/Camtasia-Mac/mp4v2
+X_libmp4v2_la_LDFLAGS = 
+abs_builddir = /home/pi/code/robot/opensources/mp4v2
+abs_srcdir = /home/pi/code/robot/opensources/mp4v2
+abs_top_builddir = /home/pi/code/robot/opensources/mp4v2
+abs_top_srcdir = /home/pi/code/robot/opensources/mp4v2
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 ac_ct_DUMPBIN = 
@@ -425,33 +425,33 @@ am__quote =
 am__tar = ${AMTAR} chof - "$$tardir"
 am__untar = ${AMTAR} xf -
 bindir = ${exec_prefix}/bin
-build = i386-apple-darwin14.5.0
+build = armv7l-unknown-linux-gnueabi
 build_alias = 
-build_cpu = i386
-build_os = darwin14.5.0
-build_vendor = apple
+build_cpu = armv7l
+build_os = linux-gnueabi
+build_vendor = unknown
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = i386-apple-darwin14.5.0
+host = armv7l-unknown-linux-gnueabi
 host_alias = 
-host_cpu = i386
-host_os = darwin14.5.0
-host_vendor = apple
+host_cpu = armv7l
+host_os = linux-gnueabi
+host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /Users/stephenwagner/code/Camtasia-Mac/mp4v2/autoaux/install-sh
+install_sh = ${SHELL} /home/pi/code/robot/opensources/mp4v2/autoaux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
 localstatedir = ${prefix}/var
-lt_ECHO = /bin/echo
+lt_ECHO = echo
 mandir = ${datarootdir}/man
-mkdir_p = $(top_builddir)/autoaux/install-sh -c -d
+mkdir_p = /bin/mkdir -p
 oldincludedir = /usr/include
 pdfdir = ${docdir}
 prefix = /usr/local
@@ -584,11 +584,11 @@ MK_CXX_I = \
 
 
 ###############################################################################
-man1_MANS = \
-        doc/man/man1/mp4art.1       \
-        doc/man/man1/mp4file.1      \
-        doc/man/man1/mp4subtitle.1  \
-        doc/man/man1/mp4track.1
+#man1_MANS = \
+#        doc/man/man1/mp4art.1       \
+#        doc/man/man1/mp4file.1      \
+#        doc/man/man1/mp4subtitle.1  \
+#        doc/man/man1/mp4track.1
 
 all: all-am
 
