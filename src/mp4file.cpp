@@ -597,7 +597,9 @@ void MP4File::FinishWrite(uint32_t options, bool flash)
         freeAtom->Write();
     }
 
-    m_file->sync();
+    if(!flash){
+        m_file->sync();
+    }
 }
 
 void MP4File::UpdateDuration(MP4Duration duration)
